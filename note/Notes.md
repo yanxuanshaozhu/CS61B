@@ -35,7 +35,7 @@
 1. A variable should be declared with its type before it's used
 2. You can use while loop, for loop, for each loop or other loops
 
-4 Gradscope course code: 93PK75
+4 Gradscope course code: MNXYKX
 
 5 Static Typing
 
