@@ -2,7 +2,7 @@ public class NBody {
 
     /**
      * Read and returns the radius of a universe contained in a given file
-     * 
+     *
      * @param filename the name of the give file
      * @return returns the double radius of the universe
      */
@@ -15,7 +15,7 @@ public class NBody {
 
     /**
      * Read and return a list of planets from a give file;
-     * 
+     *
      * @param filename the name of the give file
      * @return returns a list of planets contained in the file
      */

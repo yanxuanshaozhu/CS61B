@@ -10,7 +10,7 @@ public class Planet {
 
     /**
      * The first constructor, creates a planet with given parameters
-     * 
+     *
      * @param xP: planet x position
      * @param yP: planet y position
      * @param xV: planet x direction velocity
@@ -29,9 +29,8 @@ public class Planet {
 
     /**
      * Second constructor, carets a planet that is the same as the given planet.
-     * 
+     *
      * @param a given planet
-     * 
      */
     public Planet(Planet p) {
         this.xxPos = p.xxPos;
@@ -44,7 +43,7 @@ public class Planet {
 
     /**
      * Calculate the distance between self planet and a given planet
-     * 
+     *
      * @param p a given planet
      * @return returns the distance between self planet and a given planet
      */
@@ -56,7 +55,7 @@ public class Planet {
 
     /**
      * Calculate the force between self planet and a given planet
-     * 
+     *
      * @param p a given planet
      * @return returns the force between self planet and a given planet
      */
@@ -67,10 +66,10 @@ public class Planet {
 
     /**
      * Calculate the force in x direction between self planet and a given planet
-     * 
+     *
      * @param p a given planet
      * @return returns the force in x direction between self planet and a given
-     *         planet
+     * planet
      */
     public double calcForceExertedByX(Planet p) {
         double dx = p.xxPos - this.xxPos;
@@ -81,10 +80,10 @@ public class Planet {
 
     /**
      * Calculate the force in y direction between self planet and a given planet
-     * 
+     *
      * @param p a given planet
      * @return returns the force in y direction between self planet and a given
-     *         planet
+     * planet
      */
     public double calcForceExertedByY(Planet p) {
         double dy = p.yyPos - this.yyPos;
@@ -96,10 +95,10 @@ public class Planet {
     /**
      * Calculate the net force in x direction among self planet and a list of
      * planets
-     * 
+     *
      * @param planets a list of planets
      * @return returns the net force in x direction among self planet and a list of
-     *         planets
+     * planets
      */
     public double calcNetForceExertedByX(Planet[] planets) {
         double netforcex = 0;
@@ -118,10 +117,10 @@ public class Planet {
     /**
      * Calculate the net force in y direction among self planet and a list of
      * planets
-     * 
+     *
      * @param planets a list of planets
      * @return returns the net force in y direction among self planet and a list of
-     *         planets
+     * planets
      */
     public double calcNetForceExertedByY(Planet[] planets) {
         double netforcey = 0;
@@ -139,7 +138,7 @@ public class Planet {
 
     /**
      * Update self velocity and self position
-     * 
+     *
      * @param time   the duration of the force
      * @param forcex force in x direction
      * @param forcey force in y direction
@@ -157,7 +156,7 @@ public class Planet {
      * Draw a picture of the planet using the StdDraw library
      */
     public void draw() {
-        
+
         double x = this.xxPos;
         double y = this.yyPos;
         String filename = this.imgFileName;
