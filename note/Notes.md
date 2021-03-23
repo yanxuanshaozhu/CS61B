@@ -170,7 +170,7 @@
 
 # HW 00 
 
-1 Conditions
+1 Condition:
 
 1. If Statement:
     * Syntax:
@@ -193,7 +193,7 @@
     }
     ```
 
-2 Else Statement
+2 Else Statement:
 
 1. Syntax:
 ```java
@@ -204,7 +204,7 @@ if(<boolean condition>) {
 }
 ```
 
-3 While Loop
+3 While Loop:
 
 1. Syntax:
 ```java
@@ -233,7 +233,7 @@ Arrays.sort(<array name>); //This method sort returns nothing(void)
 5. Higher-dimension array:
     * Initialize an higher-dimension array example: `int[][] values = new int[3][4];`
 
-6 For Loop
+6 For Loop:
 
 1. Syntax:
 ```java
@@ -242,12 +242,12 @@ for(<initialization>; <termination>; increment){
 }
 ```
 
-7 Break and Continue
+7 Break and Continue:
 
 1. `break;`: terminate the innermost loop
 2. `continue;`: skip the current iteration of the loop and jump to the increment
 
-8 The Enhanced For Loop
+8 The Enhanced For Loop:
 
 1. Syntax:
 ```java
@@ -255,3 +255,55 @@ for(<type> ele: <collections>) {
     // Do something here;
 }
 ```
+
+
+
+# Lecture 2 2018/01/19
+
+1 Static v.s. Non-Static Methods:
+
+1. Static methods:
+    * If class uses methods in class B, then class A is a client class of class B.
+    * Two ways to run methods in a class:
+        * Run methods in `main` function in its own class
+        * Run methods in `main` function of a client class
+
+2. Instance variables and object instantiation
+    * `Object` is an instance of every class
+    * Instance variables, a.k.a. non-static variables, are defined within a class
+    * Instance methods, a.k.a. non-static methods, are ones associated with instances
+    * `new` is used for instantiation
+    * Class methods, a.k.a static methods, are accessed using dot notation
+
+3. Constructor in Java:
+    * No return type, the name should be the same as the class name
+    * Syntax:
+    ```java
+    public class <ClassName> {
+        // Constructor
+        public <ClassName> (<formal parameters>) {
+            this.<instance field> = parameter;
+        }
+    }
+    ```
+
+4. Array Instantiation, Arrays of Objects:
+    * Syntax:
+    ```java
+    <ClassName>[] <array name> = new <ClassName>[length];
+    ```
+
+2 Class Methods v.s. Instance Methods:
+
+1. Class methods, a.k.a. static methods, are actions taken by class itself. They are invoked by the class name: `<class name>.<static method name>`
+2. Instance methods, a.k.a. non-static methods, are actions taken a specific instance of a class. They are invoked by a class instance: `<instance name>.<non-static method name>`
+3. Static variables: properties inherent to the class itself, usage: `<class name>.<static variable name>`
+
+3 `public static void main(string[] args)`:
+
+1. The `main` function is called by the Java interpreter
+2. The `args` are usually refereed to the command line arguments
+
+4 Using Libraries
+
+1. It will save you bunch of time and energy
