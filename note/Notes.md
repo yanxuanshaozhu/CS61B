@@ -1,4 +1,4 @@
-# Lecture 1 2018/01/17
+# Lecture 01 2018/01/17
 
 1 Hello World
 
@@ -258,7 +258,7 @@ for(<type> ele: <collections>) {
 
 
 
-# Lecture 2 2018/01/19
+# Lecture 02 2018/01/19
 
 1 Static v.s. Non-Static Methods:
 
@@ -304,6 +304,91 @@ for(<type> ele: <collections>) {
 1. The `main` function is called by the Java interpreter
 2. The `args` are usually refereed to the command line arguments
 
-4 Using Libraries
+4 Using Libraries:
 
 1. It will save you bunch of time and energy
+
+
+
+
+# Lecture 03 2018/01/22
+
+1 Bits:
+
+1. Information in memory are 1s and 0s.
+2. 8 primitive types: `byte`, `short`, `char`, `int`, `long`, `float`, `double`, `boolean`(`true`, `false`)
+
+2 Declare a Variable in Primitive Type:
+
+1. Syntax: `type name;`, e.g. `int x;`
+2. Procedure:
+    * Computer sets aside enough bits to hold a thing of that type
+    * Java creates an internal table to map a variable to a location
+    * Java does not write anything in the reserved boxes if there is no assignment
+
+3 The Golden Rule of Equals(GRoE):
+
+1. `y = x` simply copies the bits of x into the box of y
+2. The rule applies to both primitive values and reference type objects
+
+4 Reference Type:
+
+1. Object instantiation with `new`:
+    * Java allocates a box of bits for each instance variable of the class and fills them with a default value for the variable type(0, false, null)
+    * The constructor fills each box with formal parameters if there exists any
+    * You can think that `new` returns the location in memory where the instance is put
+2.  Declaration of reference type:
+    * Java allocates a box of 64 bits, no matter what exactly the reference type object is
+    * The bits set to null(all 0s) or the 64-bit address returned by the `new` statement
+    * If you reassign a variable to the another object, then the original objet is no longer being referred, if there is no other references, it will be garbage collected
+
+5 Parameter Passing:
+
+1. GRoE applies in parameter passing, so the parameter passing is called the pass by value
+2. An example:
+```java
+public class PassByValueFigure {
+    public static void main(String[] args) {
+           Walrus walrus = new Walrus(3500, 10.5);
+           int x = 9;
+
+           doStuff(walrus, x);                                  
+           /*
+           Pass by value, so the parameter W is the 64-bit address of walrus, and x is the bits of int 9,
+           in the local scope, when W.weight is changed, it also changes the referred object walrus,
+           but when the bits of int 9 is changed, is has no influence on the x in the outer scope. 
+           */
+           System.out.println(walrus.weight);                   // 3400
+           System.out.println(x);                               // 9
+    }
+
+    public static void doStuff(Walrus W, int x) {
+           W.weight = W.weight - 100;
+           x = x - 5;
+    }
+}
+
+```
+
+6 The IntList class:
+
+1. A comparison 
+```java
+public int size() {
+    if (this.rest == null) {                     // Here you cannot write like if(this == null ){ return 0;}, because it is an instance method,
+        return 1;                                //  it's invoked by lst.size(), if lst == null, then this call will result in NullPointer error
+    }
+    return 1 + this.rest.size();
+}
+
+public static int size(IntList lst) {
+    if(lst == null) {                           // For the static method, you can use however, the lst == null statement, because in this situation, 
+        return 0;                               // it's invoked by IntList.size(lst)
+    } else {
+        return 1 + size(lst.rest)
+    }
+}
+
+```
+2. If you use something like `this = this.rest` in your code, it's better to declare ahead `IntList cur = this` and use `cur` instead
+3. Other functions: `size`, `iterativeSize`, `get`
