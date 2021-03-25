@@ -392,3 +392,63 @@ public static int size(IntList lst) {
 ```
 2. If you use something like `this = this.rest` in your code, it's better to declare ahead `IntList cur = this` and use `cur` instead
 3. Other functions: `size`, `iterativeSize`, `get`
+
+
+
+
+# Lecture 04 2018//01/24
+
+1 Improvements of the `IntList` into the `SList`:
+
+1. Re-branding: rename to `IntList` class to the `IntNode` class
+
+2. Bureaucracy: 
+    * Put `IntNode` class inside the `SList` class, hide the naked recursive structure in the `IntNode` class
+    * add method: `addFirst`, `getFirst`, `addLast`, `size`
+
+3. Private v.s. Public:
+    * Private variables/methods cannot be accessed from somewhere outside the java file where they are defined
+    * in real world, private codes should be ignored by users, whereas public codes could be accessed and used from all users from anywhere
+
+4. Nested classes:
+    * Classes in different files can be put together into nested classes into a single file
+    * If the nested class doesn't need access to other instance variables and methods, it could be declared as `static`
+    * Use a helper function when inner class is recursive structure, but the outer one is not
+    ``` java
+
+    private static int sizeHelper(IntNode cur) {
+        if(cur.next == null) {
+            return 1;
+        } else {
+            return 1 + sizeHelper(cur.next);
+        }
+    }      
+    /* This function is wrong, since there is no such function called size() in the inner InterNode class.
+    public int size() {
+            if(cur.next == null) {
+                return 1;
+            } else {
+                return 1 + node.next.size();  => this call is wrong
+            }   
+    }
+    */
+    public int size() {
+        return sizeHelper(node);
+    }
+    ```
+    * Functions with same name but different signatures are called overloaded functions
+
+5. Caching:
+    
+* Use a variable to cache the list size will result in quicker size function, but lower in addFirst function, addLast function and heavier memory usage
+    
+6. The empty lists:
+    * The first way: use a new constructor for the empty list, in this way you need to take care of the null boundary condition
+    * Use sentinel node as a instance variable to calculate store the first dummy node, the first actual node is `sentinel.next`, this way is preferred for simpler boundary conditions
+
+7. Invariants:
+    * An invariant is a condition that is guaranteed to be true during code execution
+    * Invariants for the `SList` class:
+        * The first item is the `sentinel.next.first`
+        * The size is the actual amount of items
+        * Sentinel references refer to a sentinel node
