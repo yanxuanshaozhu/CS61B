@@ -109,6 +109,8 @@
 
 
 
+
+
 # Lab 01 
 
 1 Version Control Systems(VCSs):
@@ -165,6 +167,8 @@
     * `git checkout -b <branch name>`:create a new branch and switch to it
     * `git branch -d <branch name>`: delete a branch
     * `git branch -v`: show current branch name
+
+
 
 
 
@@ -258,6 +262,8 @@ for(<type> ele: <collections>) {
 
 
 
+
+
 # Lecture 02 2018/01/19
 
 1 Static v.s. Non-Static Methods:
@@ -273,7 +279,7 @@ for(<type> ele: <collections>) {
     * Instance variables, a.k.a. non-static variables, are defined within a class
     * Instance methods, a.k.a. non-static methods, are ones associated with instances
     * `new` is used for instantiation
-    * Class methods, a.k.a static methods, are accessed using dot notation
+    * Class methods, a.k.a. static methods, are accessed using dot notation
 
 3. Constructor in Java:
     * No return type, the name should be the same as the class name
@@ -307,6 +313,8 @@ for(<type> ele: <collections>) {
 4 Using Libraries:
 
 1. It will save you bunch of time and energy
+
+
 
 
 
@@ -396,14 +404,16 @@ public static int size(IntList lst) {
 
 
 
-# Lecture 04 2018//01/24
 
-1 Improvements of the `IntList` into the `SList`:
+
+# Lecture 04 2018/01/24
+
+1 Improvements of the `IntList` into the `SLList`:
 
 1. Re-branding: rename to `IntList` class to the `IntNode` class
 
 2. Bureaucracy: 
-    * Put `IntNode` class inside the `SList` class, hide the naked recursive structure in the `IntNode` class
+    * Put `IntNode` class inside the `SLList` class, hide the naked recursive structure in the `IntNode` class
     * add method: `addFirst`, `getFirst`, `addLast`, `size`
 
 3. Private v.s. Public:
@@ -439,16 +449,81 @@ public static int size(IntList lst) {
     * Functions with same name but different signatures are called overloaded functions
 
 5. Caching:
-    
+   
 * Use a variable to cache the list size will result in quicker size function, but lower in addFirst function, addLast function and heavier memory usage
-    
+  
 6. The empty lists:
     * The first way: use a new constructor for the empty list, in this way you need to take care of the null boundary condition
     * Use sentinel node as a instance variable to calculate store the first dummy node, the first actual node is `sentinel.next`, this way is preferred for simpler boundary conditions
 
 7. Invariants:
     * An invariant is a condition that is guaranteed to be true during code execution
-    * Invariants for the `SList` class:
+    * Invariants for the `SLList` class:
         * The first item is the `sentinel.next.first`
         * The size is the actual amount of items
         * Sentinel references refer to a sentinel node
+
+
+
+
+
+
+# Lecture 05 2018/01/26
+
+1 Improvements of the `SLList` into the `DLList`:
+
+1. Looking back:
+    * The addLast function is slow for the SLList, you can add a `public IntNode prev` to convert the SLList(single-linked list) into the DLList(double-linked list)
+    * Add a last node `private IntNode prev`
+
+2. Sentinel Update:
+    * Deal with the problem that last node can point to both a sentinel node or a real node
+    * The first way: use two sentinel nodes, one at the beginning of the list, one at the end of the list
+    * The second way: use one sentinel node, but let the list become circular, which means the last real node points to the sentinel node at the beginning
+
+3. Generic lists:
+    * Deal with the problem that the current DLList can only holds int values
+    * Syntax:
+    ```java
+    public class DLList<T> {                      // This means the DLList can hold type T values
+        private IntNode sentinel;
+        private int size;
+
+        public class IntNode {
+            public IntNode prev;
+            public IntNode next;
+            public T first;                      // The first item in the IntNode is type T
+        }
+
+        // Other codes
+    }
+    //The type in the new statement can be omitted, although it's definitely right to add it in the statement 
+    DLList<String> lst = new DLList<>("String values");                     
+    ```
+
+
+2 Array Basics:
+
+1. An array is a special type of object ths consists of a numbered sequence of memory boxes
+
+2. Fixed integer length $N$, then $N$ boxes with indices starting from $0$ to $N - 1$, get length of an array: `myArray.length`
+
+3. Creation:
+    * `int[] x = new int[3];`
+    * `int[] x = new int[] {1, 2, 3};`
+    * `int[] x = {1, 2, 3};`
+
+4. Access and Modification:
+    * `myArray.length;`
+    * Same object `array1 = array2;`
+    * Create a new object: `System.arraycopy(old_array, start_old_index, new_array, start_new_index, copy_length);`
+
+5. 2D Arrays in Java:
+    * Example: `int[][] x = new int[4][];`
+
+6. Arrays v.s. Classes:
+    * Both can be used to organize a bunch of memory boxes
+    * Array boxes are numbered and accessed by `[]`, class boxes are named(fields) and accessed by `.`
+    * Array boxes should be in the same type, class boxes can be in different types
+    * One can specify array indices at runtime, and can only use reflection to specify class fields
+
