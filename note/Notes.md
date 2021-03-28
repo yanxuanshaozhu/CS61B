@@ -527,3 +527,46 @@ public static int size(IntList lst) {
     * Array boxes should be in the same type, class boxes can be in different types
     * One can specify array indices at runtime, and can only use reflection to specify class fields
 
+
+
+
+
+
+# Lecture 06 2018/01/29
+
+1 DLList: fast in add/remove/get methods, ignore special cases, but get is slow for long lists, because you need to travel through every item on the way, which is slower than arrays in this sense, so we can use AList to tackle this problem
+
+2 Resize AList when full, i.e., when `size == items.length`:
+
+* The most trivial way:
+    ```java
+        // Part of the addLast function with resizing taken into consideration
+        if (size == items.length) {
+            int[] newItems = new int[size + 1];
+            System.arraycopy(items, 0, newItems, 0, size);
+            newItems[size] = value;
+            size += 1;
+            items = newItems;
+        }
+    ```
+* The above way is quite slow when one adds a large quantity of items into the array, because there is so many resizing during the process
+* A faster way is called the multiplicative resizing: `items.length * multiplicative factor`
+
+3 Load factor/usage ratio
+
+* Definition: `LF = size / items.length`
+* If $LF < 0.25$, then there is so much space unused in the array, so we resize downwards the array by `items.length => items.length / 2`
+
+4 Genetic arrays:
+
+* Add a type generic to the AList so it can hold items other than integers
+* Syntax: 
+
+```java
+//  This is correct
+Type[] items = (Type[]) new Object[capacity];
+
+//  This is wrong
+Type[] items = new Type[capacity];
+```
+* One is not allowed to create generic type arrays in Java, one needs to use the typecast, otherwise a generic array creation error is caused
