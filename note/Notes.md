@@ -570,3 +570,46 @@ Type[] items = (Type[]) new Object[capacity];
 Type[] items = new Type[capacity];
 ```
 * One is not allowed to create generic type arrays in Java, one needs to use the typecast, otherwise a generic array creation error is caused
+
+
+
+
+
+# Lab 03 
+
+1 Unit Testing:
+
+1. Test each method in your code, and ultimately ensure that you have a working program
+2. Unit: break down the program into smallest part to enforce good code structure, each method should do only one thing
+3. JUnit: a unit testing framework for Java
+
+2 Add JUnit to your program:
+
+1. Java program: `import org.junit.Test`, `import static org.junit.Assert.*`
+2. Maven program:
+```xml
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>     <!-- Enter a compatible junit version number here -->
+</dependency>
+```
+For compatible versions, search <a href = "https://search.maven.org/">search.maven.org</a>
+
+3 JUnit Syntax:
+
+1. Syntax:
+```java
+public class ClassTest {
+    
+    @Test
+    public void methodTest {
+        assertEquals(ExpectedValue, MethodCalculation);
+        assertNull(MethodCalculation);   // This one equals to assertEquals(null, MethodCalculation);
+        assertTrue(MethodCalculation);
+        assertFalse(MethodCalculation);
+        assertNotEquals(ExpectedValue, MethodCalculation);
+    }
+}
+```
+2.  Use annotation `@Test` and non-static method only
