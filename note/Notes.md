@@ -613,3 +613,60 @@ public class ClassTest {
 }
 ```
 2.  Use annotation `@Test` and non-static method only
+
+4 Reverse a linked list:
+
+1. Recursion:
+
+```java 
+    public class Test {
+        public static void reverse(LinkedNode first) {
+            if (first == null || first.next == null) {                 // Situation where the list is an empty linked list or there is only one item in the list
+                return first;                                
+            } else {
+                LinkedNode re = Test.reverse(first.next);              // re is the reversed linked list,
+                first.next.next = first;                               // Let the second item in the linked list points to first
+                first.next = null;                                     // Let first points to null
+                return re;                                             // Return the whole reversed linked list
+            }
+        }
+    }
+    /* An example
+    LinkedList(1,2,3,4) =>  1 -> 2 -> 3 -> 4 -> null
+    first = 1, re = LinkedList(4,3,2) => 4 -> 3 -> 2 -> null
+    first.next = 2, so the first.next.next = first turns re into 4 -> 3 -> 2 -> 1
+    first.next = null turns re into 4 -> 3 -> 2 -> 1 -> null, then done
+    */
+```
+
+2. Iteration:
+
+```java
+    public class Test {
+        public static void reverse(LinkedNode first) {
+            LinkedNode re = null;                                      // This is the reversed linked list
+            LinkedNode cur = first;                                    // This is the first node in the unreversed part of the original list
+            while (cur != null) {
+                LinkedNode temp = cur.next;                            // Save the next node of the current node
+                cur.next = re;                                         // current node points to first node in the reversed linked list
+                re = cur;                                              // Modify the linked list to the current node is the first node in it
+                cur = temp;                                            // Next node in the unreversed part of the original list
+            }
+            return re;                                                 // Return the whole reversed linked list
+        }
+    }
+```
+
+5 int and Integer:
+
+1. If two `int` variables have the same value, then they are equal
+2. If two `Integer` variables have the same value, then they may be not equal:
+```java
+int a = val;
+Integer val1 = Integer.valueOf(a);
+Integer val2 = Integer.valueOf(a);
+
+val1 == val2; 
+
+```
+If $0 \leq val \leq 127$, then `true`, else if $128 \leq val$, then `false`.  This is related to wrapper class and java constant pool.
