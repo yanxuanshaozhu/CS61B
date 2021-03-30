@@ -5,7 +5,7 @@ import java.util.Formatter;
  * with a large number of additional methods.
  *
  * @author P. N. Hilfinger, with some modifications by Josh Hug and melaniecebula
- *         [Do not modify this file.]
+ * [Do not modify this file.]
  */
 public class IntList {
     /**
@@ -29,7 +29,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -105,33 +105,6 @@ public class IntList {
         return lst;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
-     * will be introduced later in the course or feature some form of advanced
-     * trickery which we implemented to help make your life a little easier for
-     * the lab.
-     */
-
-    @Override
-    public int hashCode() {
-        return first;
-    }
-
     /**
      * Returns a new IntList containing the ints in ARGS. You are not
      * expected to read or understand this method.
@@ -150,6 +123,35 @@ public class IntList {
             p.rest = new IntList(args[k], null);
         }
         return result;
+    }
+
+    /**
+     * Return an IntList that is the reverse of the input IntList
+     *
+     * @param lst input IntList
+     * @return reversed version of the input IntList
+     */
+    public static IntList reverse(IntList lst) {
+        if (lst == null || lst.rest == null) {
+            return lst;
+        } else {
+            IntList newLst = IntList.reverse(lst.rest);
+            lst.rest.rest = lst;
+            lst.rest = null;
+            return newLst;
+        }
+    }
+
+    /**
+     * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
+     * will be introduced later in the course or feature some form of advanced
+     * trickery which we implemented to help make your life a little easier for
+     * the lab.
+     */
+
+    @Override
+    public int hashCode() {
+        return first;
     }
 
     /**

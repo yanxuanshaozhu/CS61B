@@ -1,6 +1,6 @@
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class IntListTest {
 
@@ -66,8 +66,27 @@ public class IntListTest {
         assertEquals(IntList.of(1, 2, 3), A);
     }
 
-    /** If you're running this from the command line, you'll need
-      * to add a main method. See ArithmeticTest.java for an
-      * example. */
+    /**
+     * If you're running this from the command line, you'll need
+     * to add a main method. See ArithmeticTest.java for an
+     * example.
+     */
+
+    @Test
+    public void testReverse() {
+        IntList lst1 = IntList.of(1, 2, 3);
+        // Test correctness for reversing a normal IntList
+        assertEquals(IntList.of(3, 2, 1), IntList.reverse(lst1));
+
+        // Test correctness for handling an null input
+        IntList lst2 = IntList.of();
+        // assertEquals(null,IntList.reverse(lst2)); This one is okay, but one can simply use the following test
+        assertNull(IntList.reverse(lst2));
+
+        // Test correctness for destructiveness
+        IntList lst3 = IntList.of(1, 2, 3);
+        assertNotEquals(lst3, IntList.reverse(lst1));
+    }
+
 
 }
