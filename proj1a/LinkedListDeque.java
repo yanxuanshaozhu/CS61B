@@ -97,7 +97,7 @@ public class LinkedListDeque<T> {
         return getHelper(index, sentinel.next, 0);
     }
 
-    private class TNode {
+    public class TNode {
         public T item;
         public TNode next;
         public TNode prev;
