@@ -9,14 +9,6 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(T item) {
-        sentinel = new TNode((T) Integer.valueOf(1), null, null);
-        TNode newNode = new TNode(item, sentinel, sentinel);
-        sentinel.prev = newNode;
-        sentinel.next = newNode;
-        size = 1;
-    }
-
     public int size() {
         return size;
     }
@@ -97,7 +89,7 @@ public class LinkedListDeque<T> {
         return getHelper(index, sentinel.next, 0);
     }
 
-    public class TNode {
+    private class TNode {
         public T item;
         public TNode next;
         public TNode prev;

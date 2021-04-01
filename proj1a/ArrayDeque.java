@@ -16,18 +16,18 @@ public class ArrayDeque<T> {
     public int size() {
         /*
         Two conditions to calculate the dequeue size:
-        1. If front < rear: then size = rear - front + 1
-        2. If front > rear: then size = rear - front + 1 + n
-         */
+        If front < rear: then size = rear - front + 1
+        If front > rear: then size = rear - front + 1 + n
+        */
         return (rear + 1 - front + items.length) % items.length;
     }
 
     private boolean isFull() {
         /*
         Two conditions for a dequeue implemented in circular array to be full:
-        1. If front < rear: then front == 0 && rear == items.length -1
-        2. If front > rear: then front - rear == 1
-         */
+        If front < rear: then front == 0 && rear == items.length -1
+        If front > rear: then front - rear == 1
+        */
         return (rear + 1) % items.length == front;
     }
 
@@ -36,15 +36,27 @@ public class ArrayDeque<T> {
     }
 
     private void expandLength() {
+        int temp = items.length;
         T[] newItems = (T[]) new Object[items.length * 2];
-        System.arraycopy(items, 0, newItems, 0, size());
+        System.arraycopy(items, 0, newItems, 0, items.length);
         items = newItems;
+        front = 0;
+        rear = temp - 1;
     }
 
     private void reduceLength() {
         T[] newItems = (T[]) new Object[items.length / 2];
-        System.arraycopy(items, 0, newItems, 0, size());
+        int temp = size();
+        if (front < rear) {
+            System.arraycopy(items, front, newItems, 0, size());
+        } else if (front > rear) {
+            System.arraycopy(items, front, newItems, 0, items.length - front);
+            System.arraycopy(items, 0, newItems, items.length - front, rear + 1);
+        }
         items = newItems;
+        front = 0;
+        rear = temp - 1;
+
     }
 
     public void addFirst(T item) {
@@ -78,44 +90,51 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (items.length >= 16 && size() / items.length < usageFactor) {
+        double val = size() * 1.0 / items.length;
+        if (items.length >= 16 && size() * 1.0 / items.length < usageFactor) {
             reduceLength();
         }
         if (front < 0) {                              // Empty dequeue
             return null;
         } else if (front == rear) {                   // Only one item in the dequeue
             T temp = items[front];
+            items[front] = null;
             front = -1;
             rear = -1;
             return temp;
         } else if (front == items.length - 1) {       // Front is at index items.length - 1
             T temp = items[front];
+            items[front] = null;
             front = 0;
             return temp;
         } else {                                     // Other situations
             T temp = items[front];
+            items[front] = null;
             front += 1;
             return temp;
         }
     }
 
     public T removeLast() {
-        if (items.length >= 16 && size() / items.length < usageFactor) {
+        if (items.length >= 16 && size() * 1.0 / items.length < usageFactor) {
             reduceLength();
         }
         if (rear < 0) {                              // Empty list
             return null;
         } else if (rear == front) {                  // Only one item in the dequeue
             T temp = items[rear];
+            items[rear] = null;
             rear = -1;
             front = -1;
             return temp;
         } else if (rear == 0) {                     // Rear at index 0
             T temp = items[rear];
+            items[rear] = null;
             rear = items.length - 1;
             return temp;
         } else {                                    // Other situations
             T temp = items[rear];
+            items[rear] = null;
             rear -= 1;
             return temp;
         }
@@ -144,10 +163,11 @@ public class ArrayDeque<T> {
         }
         /*
         Two conditions for the index:
-        1. If front < rear: then front = 0 and index starts from 0, so the index can be used directly
-        2. If front > rear: then we want index 0 to be items[front], wo one let index = (front + index) % 5
-         */
+        If front < rear: then front = 0 and index starts from 0, the index can be used directly
+        If front > rear: then we want index 0 to be items[front], let index = (front + index) % 5
+        */
         index = (front + index) % 5;
         return items[index];
     }
 }
+
