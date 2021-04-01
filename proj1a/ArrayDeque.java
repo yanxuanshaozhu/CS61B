@@ -90,7 +90,6 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        double val = size() * 1.0 / items.length;
         if (items.length >= 16 && size() * 1.0 / items.length < usageFactor) {
             reduceLength();
         }
@@ -164,9 +163,9 @@ public class ArrayDeque<T> {
         /*
         Two conditions for the index:
         If front < rear: then front = 0 and index starts from 0, the index can be used directly
-        If front > rear: then we want index 0 to be items[front], let index = (front + index) % 5
+        If front > rear: then we want index 0 to be items[front], let index = (front + index) % items.length
         */
-        index = (front + index) % 5;
+        index = (front + index) % items.length;
         return items[index];
     }
 }

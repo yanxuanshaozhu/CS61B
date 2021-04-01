@@ -75,22 +75,38 @@ public class ArrayDequeTest {
 
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
-        addIsEmptySizeTest();
-        addRemoveTest();
+        // addIsEmptySizeTest();
+        // addRemoveTest();
         ArrayDeque<Integer> ad = new ArrayDeque<>();
 
-        for (int i = 0; i < 20; i++) {
-            ad.addFirst(i);
+        int s = 0;
+        for (int i = 0; i < 500; i++) {
+            int flag = (int) (4 * Math.random());
+            switch (flag) {
+                case 0:
+                    ad.addFirst(i);
+                    s++;
+                    break;
+                case 1:
+                    ad.addLast(i);
+                    s++;
+                    break;
+                case 2:
+                    Integer res = ad.removeFirst();
+                    if (res != null) {
+                        s--;
+                    }
+                    break;
+                default:
+                    Integer res2 = ad.removeLast();
+                    if (res2 != null) {
+                        s--;
+                    }
+            }
+            if (s == 0) {
+                System.out.println(ad.isEmpty());
+            }
         }
-        ad.printDeque();
-        System.out.println();
-
-        for (int i = 0; i < 19; i++) {
-            ad.removeLast();
-        }
-        ad.printDeque();
-        System.out.println();
-
 
     }
 }

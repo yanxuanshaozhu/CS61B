@@ -78,7 +78,7 @@ public class LinkedListDeque<T> {
         return null;
     }
 
-    public T getHelper(int index, TNode cur, int count) {
+    private T getHelper(int index, TNode cur, int count) {
         if (index == count) {
             return cur.item;
         }
