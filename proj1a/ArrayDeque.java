@@ -19,7 +19,7 @@ public class ArrayDeque<T> {
         If front < rear: then size = rear - front + 1
         If front > rear: then size = rear - front + 1 + n
         */
-        if(front < 0 || rear < 0) {
+        if (front < 0 || rear < 0) {
             return 0;
         }
         return (rear + 1 - front + items.length) % items.length;

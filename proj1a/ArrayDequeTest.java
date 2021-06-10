@@ -80,7 +80,7 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> ad = new ArrayDeque<>();
         System.out.println(ad.size());
         int s = 0;
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 20; i++) {
             int flag = (int) (4 * Math.random());
             switch (flag) {
                 case 0:
