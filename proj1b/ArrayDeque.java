@@ -172,11 +172,6 @@ public class ArrayDeque<T> implements Deque<T> {
         if (isEmpty() || index < 0 || index > size() - 1) {
             return null;
         }
-        /*
-        Two conditions for the index:
-        If front < rear: then front = 0 and index starts from 0, the index can be used directly
-        If front > rear: then we want index 0 to be items[front], let index = (front + index) % items.length
-        */
         index = (front + index) % items.length;
         return items[index];
     }

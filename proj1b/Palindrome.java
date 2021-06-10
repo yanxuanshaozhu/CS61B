@@ -9,6 +9,9 @@ public class Palindrome {
     }
 
     public boolean isPalindrome(String word) {
+        if (word == null) {
+            return false;
+        }
         if (word.length() <= 1) {
             return true;
         }
@@ -24,7 +27,9 @@ public class Palindrome {
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
-        OffByOne offByOne = new OffByOne();
+        if (word == null) {
+            return false;
+        }
         if (word.length() <= 1) {
             return true;
         }
@@ -33,7 +38,7 @@ public class Palindrome {
         for (int i = 0; i < word.length(); i++) {
             char origin = word.charAt(i);
             char comparison = reverse.charAt(i);
-            if (!offByOne.equalChars(origin, comparison)) {
+            if (!cc.equalChars(origin, comparison)) {
                 return false;
             }
         }
